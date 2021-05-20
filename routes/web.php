@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FormCreateController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [
-    HomeController::class, 'index'
-])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/create', [FormCreateController::class, 'index']);
+Route::post('/home', [FormCreateController::class, 'create']);
+
+Route::resource('qurans', App\Http\Controllers\quranController::class);
