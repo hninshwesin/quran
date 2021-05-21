@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
+use App\Models\UserModel;
 
 use Illuminate\Http\Request;
 
@@ -23,6 +25,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if(Auth::check()) {
+            $user=Auth::user();
+            $user_id = $user->id;
+            $user_model = UserModel::where('user_id', $user_id)->get();
+            return view('home', compact('user_model'));
+
+        } else {
+            return redirect("/login");
+        }
+        
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Database\Seeders\QuranSeeder;
+use Flash;
 
 class FormCreateController extends Controller
 {
@@ -16,109 +17,122 @@ class FormCreateController extends Controller
     }
 
     public function create(Request $request) {
-        $data = [];
 
-        $id=[
-            "name"=>"id",
-            "dbType"=>"increments",
-            "htmlType"=> null,
-            "validations"=> null,
-            "searchable"=> false,
-            "fillable"=> false,
-            "primary"=> true,
-            "inForm"=> false,
-            "inIndex"=> false,
-            "inView"=> false
-        ];
-        array_push($data,$id);
+        $user = Auth::user();
+        
+        $user_id = $user->id;
 
-        $chapter=[
-            "name" => "chapter",
-            "dbType" => "integer",
-            "htmlType" => "number",
-            "validations" => "required",
-            "searchable" => true,
-            "fillable" => true,
-            "primary" => false,
-            "inForm" => true,
-            "inIndex" => true,
-            "inView" => true
-        ];
-        array_push($data,$chapter);
+        $user_model = UserModel::where('user_id', $user_id)->get();
+        if(!$user_model) {
+            $data = [];
 
-        $verse=[
-            "name" => "verse",
-            "dbType" => "integer",
-            "htmlType" => "number",
-            "validations" => "required",
-            "searchable" => true,
-            "fillable" => true,
-            "primary" => false,
-            "inForm" => true,
-            "inIndex" => true,
-            "inView" => true
-        ];
-        array_push($data,$verse);
+            $id=[
+                "name"=>"id",
+                "dbType"=>"increments",
+                "htmlType"=> null,
+                "validations"=> null,
+                "searchable"=> false,
+                "fillable"=> false,
+                "primary"=> true,
+                "inForm"=> false,
+                "inIndex"=> false,
+                "inView"=> false
+            ];
+            array_push($data,$id);
 
-        $translation=[
-            "name" => "translation",
-            "dbType" => "string",
-            "htmlType" => "text",
-            "validations" => null,
-            "searchable" => true,
-            "fillable" => true,
-            "primary" => false,
-            "inForm" => true,
-            "inIndex" => true,
-            "inView" => true
-        ];
-        array_push($data,$translation);
+            $chapter=[
+                "name" => "chapter",
+                "dbType" => "integer",
+                "htmlType" => "number",
+                "validations" => "required",
+                "searchable" => true,
+                "fillable" => true,
+                "primary" => false,
+                "inForm" => true,
+                "inIndex" => true,
+                "inView" => true
+            ];
+            array_push($data,$chapter);
 
-        $created_at=[
-            "name"=> "created_at",
-            "dbType"=> "timestamp",
-            "htmlType"=> null,
-            "validations"=> null,
-            "searchable"=> false,
-            "fillable"=> false,
-            "primary"=> false,
-            "inForm"=> false,
-            "inIndex"=> false,
-            "inView"=> true
-        ];
-        array_push($data,$created_at);
+            $verse=[
+                "name" => "verse",
+                "dbType" => "integer",
+                "htmlType" => "number",
+                "validations" => "required",
+                "searchable" => true,
+                "fillable" => true,
+                "primary" => false,
+                "inForm" => true,
+                "inIndex" => true,
+                "inView" => true
+            ];
+            array_push($data,$verse);
 
-        $updated_at=[
-            "name"=> "updated_at",
-            "dbType"=> "timestamp",
-            "htmlType"=> null,
-            "validations"=> null,
-            "searchable"=> false,
-            "fillable"=> false,
-            "primary"=> false,
-            "inForm"=> false,
-            "inIndex"=> false,
-            "inView"=> true
-        ];
-        array_push($data,$updated_at);
+            $translation=[
+                "name" => "translation",
+                "dbType" => "string",
+                "htmlType" => "text",
+                "validations" => null,
+                "searchable" => true,
+                "fillable" => true,
+                "primary" => false,
+                "inForm" => true,
+                "inIndex" => true,
+                "inView" => true
+            ];
+            array_push($data,$translation);
 
-        $authname = $request->modelName;
-        $filename=base_path()."/public/jsonFile/$authname.json";
-        $json_data = json_encode($data);
-        file_put_contents( "$filename", $json_data);
+            $created_at=[
+                "name"=> "created_at",
+                "dbType"=> "timestamp",
+                "htmlType"=> null,
+                "validations"=> null,
+                "searchable"=> false,
+                "fillable"=> false,
+                "primary"=> false,
+                "inForm"=> false,
+                "inIndex"=> false,
+                "inView"=> true
+            ];
+            array_push($data,$created_at);
 
-        $CMD = 'php ' .base_path().'/artisan infyom:scaffold '.$authname.' --fieldsFile='.base_path().'/public/jsonFile/'.$authname.'.json --paginate=10';
-        // dd($CMD);
-        shell_exec($CMD);
-        Artisan::call("migrate");
-        $model = new QuranSeeder($authname);
-        $model->run();
+            $updated_at=[
+                "name"=> "updated_at",
+                "dbType"=> "timestamp",
+                "htmlType"=> null,
+                "validations"=> null,
+                "searchable"=> false,
+                "fillable"=> false,
+                "primary"=> false,
+                "inForm"=> false,
+                "inIndex"=> false,
+                "inView"=> true
+            ];
+            array_push($data,$updated_at);
 
-        $user_model = new UserModel();
-        $user_model->user_id=Auth::user()->id;
-        $user_model->user_name=Auth::user()->name;
-        $user_model->model_name=$authname;
-        $user_model->save();
+            $authname = $request->modelName;
+            $filename=base_path()."/public/jsonFile/$authname.json";
+            $json_data = json_encode($data);
+            file_put_contents( "$filename", $json_data);
+
+            $CMD = 'php ' .base_path().'/artisan infyom:scaffold '.$authname.' --fieldsFile='.base_path().'/public/jsonFile/'.$authname.'.json --paginate=10';
+            // dd($CMD);
+            shell_exec($CMD);
+            Artisan::call("migrate");
+            $model = new QuranSeeder($authname);
+            $model->run();
+
+            $user_model = new UserModel();
+            $user_model->user_id=Auth::user()->id;
+            $user_model->user_name=Auth::user()->name;
+            $user_model->model_name=$authname;
+            $user_model->save();
+
+            return redirect(route('home'));
+        } else {
+            Flash::error('Quran already created');
+            return redirect(route('home'));
+        }
 
     }
 }
