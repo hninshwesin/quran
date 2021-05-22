@@ -18,12 +18,6 @@ class FormCreateController extends Controller
 
     public function create(Request $request) {
 
-        $user = Auth::user();
-        
-        $user_id = $user->id;
-
-        $user_model = UserModel::where('user_id', $user_id)->get();
-        if(!$user_model) {
             $data = [];
 
             $id=[
@@ -129,10 +123,6 @@ class FormCreateController extends Controller
             $user_model->save();
 
             return redirect(route('home'));
-        } else {
-            Flash::error('Quran already created');
-            return redirect(route('home'));
-        }
 
     }
 }
