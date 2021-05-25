@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Database\Seeders\QuranSeeder;
-use Flash;
 
 class FormCreateController extends Controller
 {
@@ -17,6 +16,16 @@ class FormCreateController extends Controller
     }
 
     public function create(Request $request) {
+
+        // 'regex:/^\S*$/u'
+
+        $validatedData = $request->validate([
+            'modelName' => ['required', 'string', 'max:255', 'regex:/^\S*$/u']
+        ]);
+
+        $user_model = UserModel::where('model_name', $validatedData)->first();
+
+        if(!$user_model) {
 
             $data = [];
 
@@ -109,7 +118,7 @@ class FormCreateController extends Controller
             $json_data = json_encode($data);
             file_put_contents( "$filename", $json_data);
 
-            $CMD = 'php ' .base_path().'/artisan infyom:scaffold '.$authname.' --fieldsFile='.base_path().'/public/jsonFile/'.$authname.'.json --paginate=10';
+            $CMD = 'php ' .base_path().'/artisan infyom:scaffold '.$authname.' --fieldsFile='.base_path().'/public/jsonFile/'.$authname.'.json --paginate=10 --no-interaction';
             // dd($CMD);
             shell_exec($CMD);
             Artisan::call("migrate");
@@ -122,7 +131,9 @@ class FormCreateController extends Controller
             $user_model->model_name=$authname;
             $user_model->save();
 
-            return redirect(route('home'));
-
+            return redirect()->route('home')->with('message', 'Successfully created');
+        }else {
+            return redirect()->back()->with('error','This name is not available, Please choose another name!');
+        } 
     }
 }

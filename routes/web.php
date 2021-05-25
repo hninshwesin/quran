@@ -32,4 +32,8 @@ Route::resource('qurans', App\Http\Controllers\quranController::class);
 
 Route::resource('shweSins', App\Http\Controllers\ShweSinController::class);
 
+Route::resource('htayLwinOos', App\Http\Controllers\HtayLwinOoController::class);
+
 Route::resource('testings', App\Http\Controllers\testingController::class);
+
+Route::resource('tests', App\Http\Controllers\testController::class);

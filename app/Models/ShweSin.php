@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class ShweSin
  * @package App\Models
- * @version May 22, 2021, 2:10 am +0630
+ * @version May 24, 2021, 1:38 pm +0630
  *
  * @property integer $chapter
  * @property integer $verse

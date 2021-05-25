@@ -7,21 +7,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Class testing
+ * Class HtayLwinOo
  * @package App\Models
- * @version May 26, 2021, 1:26 am +0630
+ * @version May 24, 2021, 2:07 pm +0630
  *
  * @property integer $chapter
  * @property integer $verse
  * @property string $translation
  */
-class testing extends Model
+class HtayLwinOo extends Model
 {
     use SoftDeletes;
 
     use HasFactory;
 
-    public $table = 'testings';
+    public $table = 'htay_lwin_oos';
     
 
     protected $dates = ['deleted_at'];

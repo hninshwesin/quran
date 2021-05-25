@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\ShweSin;
+use App\Models\HtayLwinOo;
 use App\Repositories\BaseRepository;
 
 /**
- * Class ShweSinRepository
+ * Class HtayLwinOoRepository
  * @package App\Repositories
- * @version May 24, 2021, 1:38 pm +0630
+ * @version May 24, 2021, 2:07 pm +0630
 */
 
-class ShweSinRepository extends BaseRepository
+class HtayLwinOoRepository extends BaseRepository
 {
     /**
      * @var array
@@ -37,6 +37,6 @@ class ShweSinRepository extends BaseRepository
      **/
     public function model()
     {
-        return ShweSin::class;
+        return HtayLwinOo::class;
     }
 }

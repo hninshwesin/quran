@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\book;
+use App\Models\HtayLwinOo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class bookFactory extends Factory
+class HtayLwinOoFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = book::class;
+    protected $model = HtayLwinOo::class;
 
     /**
      * Define the model's default state.
