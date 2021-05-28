@@ -21,7 +21,7 @@
 @error('modelName')
     <div class="alert alert-danger">
         <ul>
-            <li>{{ 'Name format is invalid, do not accept space.' }}</li>
+            <li>{{ 'Name format is invalid, do not accept space or underscore.' }}</li>
         </ul>
     </div>
 @enderror

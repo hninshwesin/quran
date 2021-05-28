@@ -28,12 +28,3 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/create', [FormCreateController::class, 'index']);
 Route::post('/home', [FormCreateController::class, 'create']);
 
-Route::resource('qurans', App\Http\Controllers\quranController::class);
-
-Route::resource('shweSins', App\Http\Controllers\ShweSinController::class);
-
-Route::resource('htayLwinOos', App\Http\Controllers\HtayLwinOoController::class);
-
-Route::resource('testings', App\Http\Controllers\testingController::class);
-
-Route::resource('tests', App\Http\Controllers\testController::class);
