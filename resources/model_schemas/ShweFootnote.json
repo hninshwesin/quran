@@ -37,8 +37,8 @@
     },
     {
         "name": "notes",
-        "dbType": "string:nullable",
-        "htmlType": "text",
+        "dbType": "longText:nullable",
+        "htmlType": "textarea",
         "validations": "",
         "searchable": true,
         "fillable": true,

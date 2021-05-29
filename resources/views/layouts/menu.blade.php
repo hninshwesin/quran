@@ -1,4 +1,3 @@
-
 <li class="nav-item">
     <a href="{{ route('shwes.index') }}"
        class="nav-link {{ Request::is('shwes*') ? 'active' : '' }}">

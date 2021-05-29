@@ -37,8 +37,8 @@
     },
     {
         "name": "translation",
-        "dbType": "string",
-        "htmlType": "text",
+        "dbType": "longText",
+        "htmlType": "textarea",
         "validations": "",
         "searchable": true,
         "fillable": true,

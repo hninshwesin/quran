@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class ShweFootnote
  * @package App\Models
- * @version May 29, 2021, 12:07 am +0630
+ * @version May 29, 2021, 6:46 pm +0630
  *
  * @property \App\Models\Shwe $shwe
  * @property integer $shwe_id
@@ -46,7 +46,6 @@ class ShweFootnote extends Model
         'id' => 'integer',
         'shwe_id' => 'integer',
         'heading' => 'string',
-        'notes' => 'string',
         'files' => 'string'
     ];
 

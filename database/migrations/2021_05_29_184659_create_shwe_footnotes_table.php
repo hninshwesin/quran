@@ -18,7 +18,7 @@ class CreateShweFootnotesTable extends Migration
             $table->increments('id');
             $table->integer('shwe_id')->unsigned();
             $table->string('heading');
-            $table->string('notes')->nullable();
+            $table->longText('notes')->nullable();
             $table->string('files')->nullable();
             $table->timestamps();
             $table->softDeletes();

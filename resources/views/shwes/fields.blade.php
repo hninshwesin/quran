@@ -11,7 +11,7 @@
 </div>
 
 <!-- Translation Field -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-12 col-lg-12">
     {!! Form::label('translation', 'Translation:') !!}
-    {!! Form::text('translation', null, ['class' => 'form-control']) !!}
+    {!! Form::textarea('translation', null, ['class' => 'form-control']) !!}
 </div>

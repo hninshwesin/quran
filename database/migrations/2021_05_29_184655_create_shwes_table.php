@@ -18,7 +18,7 @@ class CreateShwesTable extends Migration
             $table->increments('id');
             $table->integer('chapter');
             $table->integer('verse');
-            $table->string('translation');
+            $table->longText('translation');
             $table->timestamps();
             $table->softDeletes();
         });

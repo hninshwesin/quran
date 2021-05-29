@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class Shwe
  * @package App\Models
- * @version May 29, 2021, 12:07 am +0630
+ * @version May 29, 2021, 6:46 pm +0630
  *
  * @property integer $chapter
  * @property integer $verse
@@ -42,8 +42,7 @@ class Shwe extends Model
     protected $casts = [
         'id' => 'integer',
         'chapter' => 'integer',
-        'verse' => 'integer',
-        'translation' => 'string'
+        'verse' => 'integer'
     ];
 
     /**

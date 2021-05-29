@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserModel;
 
@@ -25,15 +26,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::check()) {
-            $user=Auth::user();
+        if (Auth::check()) {
+            $user = Auth::user();
             $user_id = $user->id;
             $user_model = UserModel::where('user_id', $user_id)->get();
             return view('home', compact('user_model'));
-
         } else {
             return redirect("/login");
         }
-        
     }
 }

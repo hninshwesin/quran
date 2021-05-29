@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use Illuminate\Container\Container as Application;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Http\Request;
 
 abstract class BaseRepository
 {
@@ -18,14 +18,17 @@ abstract class BaseRepository
      */
     protected $app;
 
+    protected $request;
+
     /**
      * @param Application $app
      *
      * @throws \Exception
      */
-    public function __construct(Application $app)
+    public function __construct(Application $app, Request $request)
     {
         $this->app = $app;
+        $this->request = $request;
         $this->makeModel();
     }
 
@@ -88,7 +91,7 @@ abstract class BaseRepository
         $query = $this->model->newQuery();
 
         if (count($search)) {
-            foreach($search as $key => $value) {
+            foreach ($search as $key => $value) {
                 if (in_array($key, $this->getFieldsSearchable())) {
                     $query->where($key, $value);
                 }
@@ -132,6 +135,16 @@ abstract class BaseRepository
      */
     public function create($input)
     {
+        // dd($input);
+        foreach ($input as $key => $value) {
+            // var_dump($i);
+            if ($this->request->hasFile($key)) {
+                // $file_name = $value->getClientOriginalName();
+                $file = $value->store('public/files');
+                $input[$key] = $file;
+            }
+        }
+
         $model = $this->model->newInstance($input);
 
         $model->save();
