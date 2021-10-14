@@ -138,7 +138,11 @@ return [
 
         'repository_pattern' => true,
 
+        // 'repository_pattern' => false,
+
         'resources' => false,
+
+        // 'scaffold_requests' => false,
 
         'excluded_fields' => ['id'], // Array of columns that doesn't required while creating module
     ],

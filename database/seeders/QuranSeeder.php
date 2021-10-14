@@ -8,7 +8,8 @@ class QuranSeeder extends Seeder
 {
     public $model;
 
-    public function __construct($model) {
+    public function __construct($model)
+    {
         // dd($model);
         $this->model = $model;
         // dd("App\\Models\\".$this->model);
@@ -140,6 +141,7 @@ class QuranSeeder extends Seeder
 
         foreach ($ChaptersVerses as $chapter => $verse) {
             $rawVerse = 1;
+            // $rawVerse = 0;
             do {
                 ("App\\Models\\$this->model")::insert(['chapter' => $chapter, 'verse' => $rawVerse, 'translation' => '']);
                 $rawVerse++;

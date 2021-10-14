@@ -22,7 +22,7 @@ class Shwe extends Model
     use HasFactory;
 
     public $table = 'shwes';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -54,6 +54,4 @@ class Shwe extends Model
         'chapter' => 'required',
         'verse' => 'required'
     ];
-
-    
 }

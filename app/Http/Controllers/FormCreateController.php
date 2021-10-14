@@ -126,7 +126,9 @@ class FormCreateController extends Controller
             $json_data = json_encode($data);
             file_put_contents("$filename", $json_data);
 
-            $CMD = 'php ' . base_path() . '/artisan infyom:scaffold ' . $authname . ' --fieldsFile=' . base_path() . '/public/jsonFile/' . $authname . '.json --paginate=10 --no-interaction';
+            $CMD = 'php ' . base_path() . '/artisan infyom:scaffold ' . $authname . ' --fieldsFile=' . base_path() . '/public/jsonFile/' . $authname .
+                '.json --paginate=10 --no-interaction';
+            // $CMD = 'php ' . base_path() . '/artisan infyom:scaffold ' . $authname . ' --fieldsFile=' . base_path() . '/public/jsonFile/' . $authname . '.json --paginate=10 --no-interaction --skip=routes,controllers,views,scaffold_requests';
             // dd($CMD);
             shell_exec($CMD);
             Artisan::call("migrate");
