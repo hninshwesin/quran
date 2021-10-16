@@ -27,8 +27,3 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/create', [FormCreateController::class, 'index']);
 Route::post('/home', [FormCreateController::class, 'create']);
-
-
-Route::resource('shwes', App\Http\Controllers\ShweController::class);
-
-Route::resource('shweFootnotes', App\Http\Controllers\ShweFootnoteController::class);
