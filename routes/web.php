@@ -27,3 +27,16 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/create', [FormCreateController::class, 'index']);
 Route::post('/home', [FormCreateController::class, 'create']);
+
+
+Route::resource('uhtaylwinoos', App\Http\Controllers\UhtaylwinooController::class);
+
+Route::resource('uhtaylwinooFootnotes', App\Http\Controllers\UhtaylwinooFootnoteController::class);
+
+Route::resource('utinmyints', App\Http\Controllers\UtinmyintController::class);
+
+Route::resource('utinmyintFootnotes', App\Http\Controllers\UtinmyintFootnoteController::class);
+
+Route::resource('arabics', App\Http\Controllers\ArabicController::class);
+
+Route::resource('arabicFootnotes', App\Http\Controllers\ArabicFootnoteController::class);
