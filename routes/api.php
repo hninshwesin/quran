@@ -24,3 +24,5 @@ Route::get('translator', [TranslatorController::class, 'translator']);
 Route::get('translate_details', [TranslatorController::class, 'translate_details']);
 
 Route::get('footnotes', [TranslatorController::class, 'footnotes']);
+
+Route::get('all_translation', [TranslatorController::class, 'all_translation']);

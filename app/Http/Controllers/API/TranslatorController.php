@@ -54,4 +54,44 @@ class TranslatorController extends Controller
             return new FootnoteResource($footnote);
         }
     }
+
+    public function all_translation(Request $request)
+    {
+        $chapter = $request->input('chapter');
+        $verse = $request->input('verse');
+        $translators = UserModel::where('model_name', 'not like', '%Footnote')->get();
+
+        $translation_data = [];
+
+        foreach ($translators as $key => $translator) {
+            $translator_name = $translator->model_name;
+
+            $model_name = 'App\\Models\\' . $translator_name;
+
+            $translation = $model_name::when($chapter, function ($query, $chapter) {
+                    return $query->where('chapter', $chapter);
+                })
+                ->when($verse, function ($query, $verse) {
+                    return $query->where('verse', $verse);
+                })->get();
+            foreach ($translation as $data) {
+                $result = [
+                    'id' => $data->id,
+                    'chapter' => $data->chapter,
+                    'verse' => $data->verse,
+                    'translation' => $data->translation,
+                    'translator' => $translator_name
+                ];
+                array_push($translation_data, $result);
+            }
+        }
+
+        // dd($translation_data);
+
+        return response()->json([
+            'data' => $translation_data
+        ]);
+
+        // return new TranslationResourceCollection($translation);
+    }
 }
