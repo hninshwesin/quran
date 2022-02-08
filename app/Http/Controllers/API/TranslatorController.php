@@ -60,6 +60,7 @@ class TranslatorController extends Controller
         $chapter = $request->input('chapter');
         $verse = $request->input('verse');
         $translators = UserModel::where('model_name', 'not like', '%Footnote')->get();
+        $translators_count = UserModel::where('model_name', 'not like', '%Footnote')->count();
 
         $translation_data = [];
 
@@ -68,21 +69,36 @@ class TranslatorController extends Controller
 
             $model_name = 'App\\Models\\' . $translator_name;
 
-            $translation = $model_name::when($chapter, function ($query, $chapter) {
-                    return $query->where('chapter', $chapter);
-                })
-                ->when($verse, function ($query, $verse) {
+            $translation[$key] = $model_name::when($chapter, function ($query) use ($chapter) {
+                return $query->where('chapter', $chapter);
+            })
+                ->when($verse, function ($query) use ($verse) {
                     return $query->where('verse', $verse);
                 })->get();
-            foreach ($translation as $data) {
-                $result = [
-                    'id' => $data->id,
-                    'chapter' => $data->chapter,
-                    'verse' => $data->verse,
-                    'translation' => $data->translation,
-                    'translator' => $translator_name
-                ];
-                array_push($translation_data, $result);
+            // foreach ($translation as $data) {
+            //     $result = [
+            //         'id' => $data->id,
+            //         'chapter' => $data->chapter,
+            //         'verse' => $data->verse,
+            //         'translation' => $data->translation,
+            //         'translator' => $translator_name
+            //     ];
+            //     array_push($translation_data, $result);
+            // }
+        }
+        // dd($translation);
+        for ($i = 0; $i < $translation[0]->count(); $i++) {
+            for ($j = 0; $j < $translators_count; $j++) {
+                if (isset($translation[$j][$i])) {
+                    $result = [
+                        'id' => $translation[$j][$i]->id,
+                        'chapter' => $translation[$j][$i]->chapter,
+                        'verse' => $translation[$j][$i]->verse,
+                        'translation' => $translation[$j][$i]->translation,
+                        'translator' => $translators[$j]->model_name
+                    ];
+                    array_push($translation_data, $result);
+                }
             }
         }
 
