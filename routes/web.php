@@ -40,3 +40,15 @@ Route::resource('utinmyintFootnotes', App\Http\Controllers\UtinmyintFootnoteCont
 Route::resource('arabics', App\Http\Controllers\ArabicController::class);
 
 Route::resource('arabicFootnotes', App\Http\Controllers\ArabicFootnoteController::class);
+
+Route::resource('gazis', App\Http\Controllers\GaziController::class);
+
+Route::resource('gaziFootnotes', App\Http\Controllers\GaziFootnoteController::class);
+
+Route::resource('ubaseins', App\Http\Controllers\UbaseinController::class);
+
+Route::resource('ubaseinFootnotes', App\Http\Controllers\UbaseinFootnoteController::class);
+
+Route::resource('uhtaylwinoowithcodes', App\Http\Controllers\UhtaylwinoowithcodeController::class);
+
+Route::resource('uhtaylwinoowithcodeFootnotes', App\Http\Controllers\UhtaylwinoowithcodeFootnoteController::class);
